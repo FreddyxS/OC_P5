@@ -39,22 +39,29 @@ boutonAjoutPanier.onclick = function() {
     } else {
         const parsed = JSON.parse(localStorage.panier);
         console.log(parsed);
-        for (let i in parsed) {
-            if (parsed[i].idProduit == produitPanier.idProduit && parsed[i].couleur == produitPanier.couleur) {
-                const int = parseInt(parsed[i].quantite,10);
-                const int2 = parseInt(quantite,10);
-                parsed[i].quantite = int + int2; 
-                const stringify = JSON.stringify(parsed);
-                localStorage.panier = stringify;
-                break;
-            } else {
-                parsed.push(produitPanier)
-                const stringify = JSON.stringify(parsed);
-                localStorage.panier = stringify;
+        console.log(parsed.length);
+        if (parsed.length == 0) {
+            liste.push(produitPanier);
+            const stringify = JSON.stringify(liste);
+            localStorage.panier = stringify;
+        }   else {
+            for (let i in parsed) {
+                if (parsed[i].idProduit == produitPanier.idProduit && parsed[i].couleur == produitPanier.couleur) {
+                    const int = parseInt(parsed[i].quantite,10);
+                    const int2 = parseInt(quantite,10);
+                    parsed[i].quantite = int + int2; 
+                    const stringify = JSON.stringify(parsed);
+                    localStorage.panier = stringify;
+                    break;
+                } else {
+                    parsed.push(produitPanier)
+                    const stringify = JSON.stringify(parsed);
+                    localStorage.panier = stringify;
+                }
             }
         }
     }
-    console.log(localStorage);
+        
 }
 
 
